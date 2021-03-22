@@ -24,6 +24,10 @@ namespace ProxyBasics
             newState.transform.localPosition = Vector3.zero;
             newState.transform.localRotation = Quaternion.identity;
             newState.transform.localScale = Vector3.one;
+
+            var transitionsHolder = new GameObject("Transitions");
+            transitionsHolder.transform.SetParent(newState.transform);
+
             States = States.Concat(new State[] { state }).ToArray();
 
             if (currentState == null)
@@ -103,17 +107,7 @@ namespace ProxyBasics
                     currentState.gameObject.SetActive(false);
                 }
 
-                // Switch Active new state
-                newState.gameObject.SetActive(true);
-
-                //Set last State
-                lastState = currentState;
-
-                // Then Set new current state
-                currentState = newState;
-
-                // Finally, call State enter
-                Callable.Call(currentState.OnStateEnter, gameObject);
+                SwitchState(newState);
             }
             else
                 Debug.LogWarning($"{gameObject.name} : Trying to set unknown state {stateName}", gameObject);
@@ -133,18 +127,7 @@ namespace ProxyBasics
                     // Then finally disable old state
                     currentState.gameObject.SetActive(false);
                 }
-
-                // Switch Active new state
-                state.gameObject.SetActive(true);
-
-                //Set last State
-                lastState = currentState;
-
-                // Then Set new current state
-                currentState = state;
-
-                // Finally, call State enter
-                Callable.Call(currentState.OnStateEnter, gameObject);
+                SwitchState(state);
             }
             else
                 Debug.LogWarning($"{gameObject.name} : Trying to set unknown state {state}", gameObject);
@@ -171,6 +154,21 @@ namespace ProxyBasics
                 // Finally, call State enter
                 Callable.Call(currentState.OnStateEnter, gameObject);
             }
+        }
+
+        private void SwitchState(State newState)
+        {
+            // Switch Active new state
+            newState.gameObject.SetActive(true);
+
+            //Set last State
+            lastState = currentState;
+
+            // Then Set new current state
+            currentState = newState;
+
+            // Finally, call State enter
+            Callable.Call(currentState.OnStateEnter, gameObject);
         }
 
         void Update()

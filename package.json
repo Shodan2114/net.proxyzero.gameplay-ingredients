@@ -1,7 +1,7 @@
 {
   "name": "net.proxyzero.gameplay-ingredients",
   "displayName": "Proxy Zero Gameplay Ingredients",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "category": "Gameplay",
   "unity": "2020.2",
   "description": "Gameplay ingredients - A Collection of scripts for the editor and runtime to set-up gameplay actions and logic in your games.",
