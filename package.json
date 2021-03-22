@@ -6,7 +6,7 @@
   "unity": "2020.2",
   "description": "Gameplay ingredients - A Collection of scripts for the editor and runtime to set-up gameplay actions and logic in your games.",
   "dependencies": {
-    "com.dbrizov.naughtyattributes": "2.0.8"
+    "com.dbrizov.naughtyattributes": "https://github.com/Shodan2114/net.proxyzero.gameplay-ingredients.git"
   },
   "keywords": [
     "Gameplay",
